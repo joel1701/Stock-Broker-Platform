@@ -1,13 +1,15 @@
 import React from 'react'
+import Hero from './Hero'
+import Brokerage from './Brokerage'
+import OpenAccount from '../OpenAccount'
 
 function PricingPage() {
 	return (
-		<main className="container py-5">
-			<h1 className="mb-3">Pricing</h1>
-			<p className="text-muted">
-				Pricing details and brokerage information will live here.
-			</p>
-		</main>
+		<div>
+			<Hero />
+			<OpenAccount />
+			<Brokerage />
+		</div>
 	)
 }
 
