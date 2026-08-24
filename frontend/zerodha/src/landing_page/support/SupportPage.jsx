@@ -1,12 +1,12 @@
 import React from 'react'
+import Hero from './Hero'
+import CreateTicket from './CreateTicket'
 
 function SupportPage() {
 	return (
 		<main className="container py-5">
-			<h1 className="mb-3">Support</h1>
-			<p className="text-muted">
-				Raise a ticket or browse support resources from this page.
-			</p>
+			<Hero />
+			<CreateTicket />
 		</main>
 	)
 }

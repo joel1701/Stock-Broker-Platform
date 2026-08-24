@@ -11,7 +11,7 @@ function Hero() {
       </div>
       <div className="row p-5 mt-5 text-center">
         <div className="col-4 p-4">
-          <img src="media /pricingEquity.svg" />
+          <img src="media/pricingEquity.svg" />
           <h1 className="fs-3">Free equity delivery</h1>
           <p className="text-muted">
             All equity delivery investments (NSE, BSE), are absolutely free — ₹
