@@ -110,6 +110,70 @@ code {
   background: var(--code-bg);
 } */
 
-.nav-link{
-  margin-left : 40px;
+#supportHero {
+  background-color: rgb(56, 126, 209);
+  color: white;
+  padding: 50px 0 70px;
+}
+
+#supportHero h1,
+#supportHero h2,
+#supportHero h4 {
+  color: white;
+}
+
+#supportWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.supportLink {
+  color: white;
+  font-size: 18px;
+}
+
+.supportContent h1 {
+  font-size: 26px;
+  line-height: 1.7;
+  margin-bottom: 25px;
+}
+
+#supportHero input {
+  width: 90%;
+  padding: 20px 25px;
+  font-size: 18px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+}
+
+.quickLinks {
+  margin-top: 20px;
+  width: 90%;
+}
+
+.quickLinks a {
+  color: white;
+  margin-right: 20px;
+  line-height: 2;
+  font-size: 17px;
+}
+
+.featured {
+  padding-left: 60px;
+}
+
+.featured h2 {
+  font-size: 26px;
+}
+
+.featured li {
+  margin-bottom: 20px;
+  font-size: 17px;
+}
+
+.featured a {
+  color: white;
 }
