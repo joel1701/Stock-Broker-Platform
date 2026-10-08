@@ -20,7 +20,6 @@ const Positions = () => {
           </tr>
           </thead>
 
-
           <tbody>
                       {positions.map((stock, index) => {
                         const curValue = stock.price * stock.qty;
