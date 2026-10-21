@@ -10,6 +10,7 @@ const cors = require("cors");
 
 const { HoldingsModel } = require("./models/HoldingsModel");
 const { PositionsModel } = require("./models/PositionsModel");
+const { OrdersModel } = require("./models/OrdersModel");
 
 
 
@@ -95,6 +96,66 @@ app.get('/allHoldings', async (req, res) => {
 app.get('/allPositions', async (req, res) => {
     let allPositions = await PositionsModel.find({});
     res.json(allPositions);
+});
+
+app.get("/allOrders", async (req, res) =>{
+    let allOrders = await OrdersModel.find({});
+    res.json(allOrders);
+})
+ 
+app.post('/newOrder', async (req, res) => {
+    try {
+        const name = String(req.body.name || "").trim();
+        const qty = Number(req.body.qty);
+        const price = Number(req.body.price);
+        const mode = String(req.body.mode || "").toUpperCase();
+
+        if (!name || !Number.isFinite(qty) || qty <= 0 ||
+            !Number.isFinite(price) || price <= 0 || !["BUY", "SELL"].includes(mode)) {
+            return res.status(400).json({ error: "Invalid order details" });
+        }
+
+        if (mode === "BUY") {
+            const holding = await HoldingsModel.findOne({ name });
+
+            if (holding) {
+                const totalQty = holding.qty + qty;
+                holding.avg = ((holding.avg * holding.qty) + (price * qty)) / totalQty;
+                holding.qty = totalQty;
+                holding.price = price;
+                await holding.save();
+            } else {
+                await HoldingsModel.create({
+                    name,
+                    qty,
+                    avg: price,
+                    price,
+                    net: "0.00%",
+                    day: "0.00%",
+                });
+            }
+        } else {
+            const holding = await HoldingsModel.findOne({ name });
+
+            if (!holding || holding.qty < qty) {
+                return res.status(400).json({ error: "Not enough shares to sell" });
+            }
+
+            if (holding.qty === qty) {
+                await HoldingsModel.deleteOne({ _id: holding._id });
+            } else {
+                holding.qty -= qty;
+                holding.price = price;
+                await holding.save();
+            }
+        }
+
+        const newOrder = await OrdersModel.create({ name, qty, price, mode });
+        res.status(201).json(newOrder);
+    } catch (error) {
+        console.error("Unable to save order:", error);
+        res.status(500).json({ error: "Unable to save order" });
+    }
 });
 
 
