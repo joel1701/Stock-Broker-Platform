@@ -10,7 +10,7 @@ const Holdings = () => {
       .get("/allHoldings")
       .then((res) => {
         setAllHoldings(res.data);
-      })
+      } )
       .catch((error) => {
         console.error("Unable to load holdings:", error);
       });
