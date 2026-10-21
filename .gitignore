@@ -1,1 +1,5 @@
 note.txt
+
+node_modules/
+note.txt
+.DS_Store
