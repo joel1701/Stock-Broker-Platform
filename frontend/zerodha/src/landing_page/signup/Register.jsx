@@ -1,14 +1,23 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Email:", email);
-    console.log("Password entered:", password.length > 0);
+    try {
+      const response = await axios.post(
+        "http://localhost:3002/signup",
+        { email, password }
+      );
+
+      alert(response.data.message);
+    } catch (error) {
+      alert(error.response?.data?.message || "Signup failed");
+    }
   };
 
   return (
@@ -18,8 +27,8 @@ function Register() {
       <form onSubmit={handleSubmit}>
         <input
           type="email"
-          placeholder="Enter Email"
           className="form-control mb-3"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -27,8 +36,8 @@ function Register() {
 
         <input
           type="password"
-          placeholder="Enter Password"
           className="form-control mb-3"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
