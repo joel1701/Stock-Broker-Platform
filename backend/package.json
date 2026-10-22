@@ -14,6 +14,7 @@
     "nodemon": "^3.1.14"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "body-parser": "^2.3.0",
     "cors": "^2.8.6",
     "dotenv": "^18.0.8",
@@ -22,5 +23,8 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^9.2.1"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true
   }
 }
