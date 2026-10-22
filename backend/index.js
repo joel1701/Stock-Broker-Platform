@@ -13,6 +13,7 @@ const UserModel = require("./models/UserModel");
 const { HoldingsModel } = require("./models/HoldingsModel");
 const { PositionsModel } = require("./models/PositionsModel");
 const { OrdersModel } = require("./models/OrdersModel");
+const authMiddleware = require("./middleware/authMiddleware");
 
 
 
@@ -177,6 +178,13 @@ app.post("/login", async (req, res) => {
       message: "Something went wrong"
     });
   }
+});
+
+app.get("/dashboard", authMiddleware, (req, res) => {
+  res.json({
+    message: "Welcome to your dashboard",
+    userId: req.userId
+  });
 });
 
 
