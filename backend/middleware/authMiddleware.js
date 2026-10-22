@@ -1,16 +1,16 @@
+
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
-  // Get token from request
-  const authHeader = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+  // Get JWT from cookie
+  const token = req.cookies.token;
+
+  if (!token) {
     return res.status(401).json({
       message: "No token provided"
     });
   }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     // Verify JWT
@@ -20,8 +20,10 @@ const authMiddleware = (req, res, next) => {
       { algorithms: ["HS256"] }
     );
 
+    // Store user ID
     req.userId = decoded.userId;
 
+    // Continue to the route
     next();
 
   } catch (error) {
